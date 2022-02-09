@@ -4,7 +4,7 @@ import Entity.Driver;
 import Menu.Menu;
 import Repository.DriverDao;
 import Repository.DriverDaoImpl;
-import Util.DataUtil;
+import Util.CollectionUtil;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -50,7 +50,7 @@ public class DriverService {
 
     public void initializeDriverData() {
         List<Driver> driverList = driverDao.getAll();
-        if (!DataUtil.isEmpty(driverList)) {
+        if (!CollectionUtil.isNullOrEmpty(driverList)) {
             Menu.driverList = driverList;
         } else {
             Menu.driverList = new ArrayList<>();

@@ -8,6 +8,7 @@ import Entity.Line;
 import Menu.Menu;
 import Repository.AssigmnetDaoImpl;
 import Repository.AssignmentDao;
+import Util.CollectionUtil;
 import Util.DataUtil;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class AssignmentService {
     private final AssignmentDao assignmentDao = new AssigmnetDaoImpl();
 
     private static boolean isNullOfEmptyDriverOrLine() {
-        return DataUtil.isEmpty(Menu.driverList) || DataUtil.isEmpty(Menu.lineList);
+        return CollectionUtil.isNullOrEmpty(Menu.driverList) || CollectionUtil.isNullOrEmpty(Menu.lineList);
     }
 
     public void showAssignmentTable() {
@@ -139,10 +140,10 @@ public class AssignmentService {
         do {
             try {
                 lineNumber = new Scanner(System.in).nextInt();
-                if (lineNumber > 0) {
+                if (lineNumber > 0 && lineNumber <= Menu.lineList.size()) {
                     break;
                 }
-                System.out.print("Số lượng tuyến là số nguyên, vui lòng nhập lại: ");
+                System.out.print("Số lượng tuyến là số nguyên và không vượt qua số tuyến có sẵn, vui lòng nhập lại: ");
             } catch (InputMismatchException ex) {
                 System.out.print("Số lượng tuyến là một số nguyên, vui lòng nhập lại: ");
             }
@@ -218,7 +219,7 @@ public class AssignmentService {
 
     public void initializeAssignmentTableData() {
         Menu.assignmentTableList = assignmentDao.getAll();
-        if (DataUtil.isEmpty(Menu.assignmentTableList)) {
+        if (CollectionUtil.isNullOrEmpty(Menu.assignmentTableList)) {
             Menu.assignmentTableList = new ArrayList<>();
         }
     }

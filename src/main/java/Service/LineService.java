@@ -4,7 +4,7 @@ import Entity.Line;
 import Menu.Menu;
 import Repository.LineDao;
 import Repository.LineDaoImpl;
-import Util.DataUtil;
+import Util.CollectionUtil;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -51,7 +51,7 @@ public class LineService {
 
     public void initializeLineData() {
         List<Line> lineList = lineDao.getAll();
-        if (!DataUtil.isEmpty(lineList)) {
+        if (!CollectionUtil.isNullOrEmpty(lineList)) {
             Menu.lineList = lineList;
         } else {
             Menu.lineList = new ArrayList<>();
